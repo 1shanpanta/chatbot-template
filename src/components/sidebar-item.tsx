@@ -16,9 +16,17 @@ export function SidebarItem({
   onDelete: () => void;
 }) {
   return (
-    <button
+    <div
+      role="button"
+      tabIndex={0}
       onClick={onSelect}
-      className={`group flex w-full items-center gap-2 rounded-lg px-3 py-2 text-left text-sm transition-colors ${
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          onSelect();
+        }
+      }}
+      className={`group flex w-full items-center gap-2 rounded-lg px-3 py-2 text-left text-sm transition-colors cursor-pointer ${
         isActive
           ? "bg-accent text-accent-foreground"
           : "hover:bg-accent/50 text-muted-foreground hover:text-foreground"
@@ -38,6 +46,6 @@ export function SidebarItem({
       >
         <Trash2 className="h-3.5 w-3.5" />
       </Button>
-    </button>
+    </div>
   );
 }

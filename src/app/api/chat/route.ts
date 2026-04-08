@@ -17,8 +17,10 @@ function isValidMessages(messages: unknown): boolean {
       typeof m === "object" &&
       typeof m.role === "string" &&
       ["user", "assistant", "system"].includes(m.role) &&
-      typeof m.content === "string" &&
-      m.content.length <= MAX_MESSAGE_LENGTH
+      // AI SDK v6 sends messages with `parts` array or `content` string
+      (typeof m.content === "string"
+        ? m.content.length <= MAX_MESSAGE_LENGTH
+        : Array.isArray(m.parts))
   );
 }
 

@@ -1,15 +1,19 @@
 "use client";
 
-import { Sparkles } from "lucide-react";
 import { appConfig } from "@/lib/config";
 
 export function EmptyState({ onPrompt }: { onPrompt: (text: string) => void }) {
   return (
     <div className="flex flex-1 flex-col items-center justify-center gap-8 px-4">
       <div className="flex flex-col items-center gap-4">
-        <div className="relative flex h-14 w-14 items-center justify-center">
-          <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-foreground/10 to-foreground/5 backdrop-blur-sm" />
-          <Sparkles className="relative h-6 w-6 text-foreground/70" />
+        <div className="relative h-12 w-12">
+          <div className="absolute inset-0 rounded-xl bg-foreground/[0.06] rotate-6" />
+          <div className="absolute inset-0 rounded-xl bg-foreground/[0.04] -rotate-3" />
+          <div className="relative flex h-full w-full items-center justify-center rounded-xl bg-foreground/[0.08]">
+            <span className="text-lg font-bold text-foreground/60 select-none">
+              {appConfig.name.charAt(0)}
+            </span>
+          </div>
         </div>
         <div className="text-center">
           <h2 className="text-2xl font-semibold tracking-tight">

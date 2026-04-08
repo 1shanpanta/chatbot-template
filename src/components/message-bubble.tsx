@@ -1,7 +1,7 @@
 "use client";
 
 import type { UIMessage } from "ai";
-import { Bot, User } from "lucide-react";
+import { appConfig } from "@/lib/config";
 import { MarkdownRenderer } from "./markdown-renderer";
 import { CopyButton } from "./copy-button";
 
@@ -23,16 +23,16 @@ export function MessageBubble({ message }: { message: UIMessage }) {
       }`}
     >
       <div
-        className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-lg ${
+        className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-lg text-xs font-semibold select-none ${
           isUser
             ? "bg-primary text-primary-foreground"
-            : "bg-muted text-muted-foreground"
+            : "bg-foreground/[0.08] text-foreground/60"
         }`}
       >
         {isUser ? (
-          <User className="h-3.5 w-3.5" />
+          <div className="h-2.5 w-2.5 rounded-full bg-primary-foreground/80" />
         ) : (
-          <Bot className="h-3.5 w-3.5" />
+          appConfig.name.charAt(0)
         )}
       </div>
 

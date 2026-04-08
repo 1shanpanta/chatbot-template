@@ -28,11 +28,13 @@ export function ChatInput({
     }
   }
 
+  const hasInput = input.trim().length > 0;
+
   return (
-    <div className="px-4 pb-4 pt-2">
+    <div className="border-t border-border/40 bg-background px-4 py-3">
       <form
         onSubmit={handleSubmit}
-        className="relative mx-auto max-w-3xl"
+        className="relative mx-auto max-w-3xl rounded-2xl border border-border/70 bg-background shadow-sm transition-colors focus-within:border-foreground/20 dark:border-border dark:bg-card dark:focus-within:border-foreground/15"
       >
         <textarea
           value={input}
@@ -42,19 +44,23 @@ export function ChatInput({
           aria-label="Chat message"
           rows={1}
           disabled={isLoading}
-          className="w-full resize-none rounded-xl bg-muted/50 py-3 pl-4 pr-12 text-[14px] leading-relaxed outline-none transition-colors placeholder:text-muted-foreground/50 focus:bg-muted/70 disabled:opacity-50 dark:bg-muted/30 dark:focus:bg-muted/40"
+          className="block w-full resize-none bg-transparent px-4 pt-3.5 pb-3.5 pr-14 text-[14px] leading-relaxed outline-none placeholder:text-muted-foreground/50 disabled:opacity-50"
           style={{ fieldSizing: "content", maxHeight: 200 } as React.CSSProperties}
         />
         <button
           type="submit"
-          disabled={!input.trim() || isLoading}
+          disabled={!hasInput || isLoading}
           aria-label={isLoading ? "Sending..." : "Send message"}
-          className="absolute bottom-2 right-2 flex h-7 w-7 items-center justify-center rounded-lg bg-primary text-primary-foreground transition-all duration-150 hover:bg-primary/90 disabled:opacity-20 disabled:cursor-not-allowed"
+          className={`absolute bottom-2.5 right-2.5 flex h-8 w-8 items-center justify-center rounded-xl transition-all duration-150 ${
+            hasInput && !isLoading
+              ? "bg-foreground text-background hover:bg-foreground/85"
+              : "bg-muted text-muted-foreground/40 cursor-not-allowed"
+          }`}
         >
           {isLoading ? (
-            <Loader2 className="h-3.5 w-3.5 animate-spin" />
+            <Loader2 className="h-4 w-4 animate-spin" />
           ) : (
-            <ArrowUp className="h-3.5 w-3.5" />
+            <ArrowUp className="h-4 w-4" strokeWidth={2.5} />
           )}
         </button>
       </form>

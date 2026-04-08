@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { Check, Copy } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import {
   Tooltip,
   TooltipContent,
@@ -26,23 +25,21 @@ export function CopyButton({ text }: { text: string }) {
     <Tooltip>
       <TooltipTrigger
         render={
-          <Button
-            variant="ghost"
-            size="icon"
+          <button
             aria-label={copied ? "Copied" : "Copy message"}
-            className="h-7 w-7 opacity-0 group-hover:opacity-100 focus-visible:opacity-100 transition-opacity"
+            className="flex h-6 w-6 items-center justify-center rounded-md text-muted-foreground/50 opacity-0 transition-all duration-150 hover:text-muted-foreground hover:bg-muted group-hover:opacity-100 focus-visible:opacity-100"
             onClick={handleCopy}
           />
         }
       >
         {copied ? (
-          <Check className="h-3.5 w-3.5 text-green-500" />
+          <Check className="h-3 w-3 text-green-500" />
         ) : (
-          <Copy className="h-3.5 w-3.5" />
+          <Copy className="h-3 w-3" />
         )}
       </TooltipTrigger>
-      <TooltipContent side="bottom">
-        {copied ? "Copied!" : "Copy message"}
+      <TooltipContent side="bottom" className="text-xs">
+        {copied ? "Copied!" : "Copy"}
       </TooltipContent>
     </Tooltip>
   );

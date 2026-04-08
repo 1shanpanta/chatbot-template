@@ -28,7 +28,7 @@ export function ChatLayout() {
   if (!hydrated) {
     return (
       <div className="flex h-full items-center justify-center">
-        <div className="h-8 w-8 animate-spin rounded-full border-2 border-primary border-t-transparent" />
+        <div className="h-6 w-6 animate-spin rounded-full border-2 border-foreground/20 border-t-foreground/70" />
       </div>
     );
   }
@@ -38,7 +38,6 @@ export function ChatLayout() {
     setPendingPrompt(text);
   }
 
-  // Clear pending prompt after it's consumed by ChatArea
   function handlePromptConsumed() {
     setPendingPrompt(null);
   }
@@ -60,7 +59,7 @@ export function ChatLayout() {
       {/* Main chat area */}
       <div className="flex flex-1 flex-col min-h-0">
         {/* Mobile header */}
-        <div className="flex items-center gap-2 border-b px-4 py-2 md:hidden">
+        <div className="flex items-center gap-2 border-b px-4 py-2.5 md:hidden">
           <Button
             variant="ghost"
             size="icon"
@@ -70,7 +69,7 @@ export function ChatLayout() {
           >
             <Menu className="h-4 w-4" />
           </Button>
-          <span className="text-sm font-medium truncate">
+          <span className="text-[13px] font-medium truncate text-foreground/80">
             {activeConversation?.title ?? "Chat"}
           </span>
         </div>

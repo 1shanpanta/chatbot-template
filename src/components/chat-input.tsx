@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { SendHorizontal } from "lucide-react";
+import { Loader2, SendHorizontal } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { appConfig } from "@/lib/config";
@@ -41,6 +41,7 @@ export function ChatInput({
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={handleKeyDown}
           placeholder={appConfig.inputPlaceholder}
+          aria-label="Chat message"
           className="min-h-[44px] max-h-[200px] resize-none"
           rows={1}
           disabled={isLoading}
@@ -50,8 +51,13 @@ export function ChatInput({
           size="icon"
           className="h-[44px] w-[44px] shrink-0"
           disabled={!input.trim() || isLoading}
+          aria-label={isLoading ? "Sending..." : "Send message"}
         >
-          <SendHorizontal className="h-4 w-4" />
+          {isLoading ? (
+            <Loader2 className="h-4 w-4 animate-spin" />
+          ) : (
+            <SendHorizontal className="h-4 w-4" />
+          )}
         </Button>
       </div>
     </form>

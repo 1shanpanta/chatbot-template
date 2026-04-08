@@ -29,7 +29,8 @@ export function SidebarItem({
       <Button
         variant="ghost"
         size="icon"
-        className="h-6 w-6 shrink-0 opacity-0 group-hover:opacity-100 transition-opacity"
+        aria-label="Delete conversation"
+        className="h-6 w-6 shrink-0 opacity-0 group-hover:opacity-100 focus-visible:opacity-100 transition-opacity"
         onClick={(e) => {
           e.stopPropagation();
           onDelete();

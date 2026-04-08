@@ -12,10 +12,14 @@ import {
 export function CopyButton({ text }: { text: string }) {
   const [copied, setCopied] = useState(false);
 
-  function handleCopy() {
-    navigator.clipboard.writeText(text);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+  async function handleCopy() {
+    try {
+      await navigator.clipboard.writeText(text);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      // Clipboard API can fail without HTTPS or permissions
+    }
   }
 
   return (
@@ -25,7 +29,8 @@ export function CopyButton({ text }: { text: string }) {
           <Button
             variant="ghost"
             size="icon"
-            className="h-7 w-7 opacity-0 group-hover:opacity-100 transition-opacity"
+            aria-label={copied ? "Copied" : "Copy message"}
+            className="h-7 w-7 opacity-0 group-hover:opacity-100 focus-visible:opacity-100 transition-opacity"
             onClick={handleCopy}
           />
         }

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useTheme } from "next-themes";
 import { Sun, Moon, Monitor } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -17,10 +17,10 @@ export function ThemeToggle() {
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
-  // Sync with external system (next-themes)
-  if (!mounted) {
-    setTimeout(() => setMounted(true), 0);
-  }
+  // Sync mount state with browser (external system)
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   function cycle() {
     const current = modes.indexOf(theme as (typeof modes)[number]);
@@ -36,7 +36,7 @@ export function ThemeToggle() {
     <Tooltip>
       <TooltipTrigger
         render={
-          <Button variant="ghost" size="icon" className="h-8 w-8" onClick={cycle} />
+          <Button variant="ghost" size="icon" className="h-8 w-8" onClick={cycle} aria-label="Toggle theme" />
         }
       >
         <Icon className="h-4 w-4" />

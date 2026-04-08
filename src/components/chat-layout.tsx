@@ -66,6 +66,7 @@ export function ChatLayout() {
             size="icon"
             className="h-8 w-8"
             onClick={() => setSidebarOpen(true)}
+            aria-label="Open menu"
           >
             <Menu className="h-4 w-4" />
           </Button>

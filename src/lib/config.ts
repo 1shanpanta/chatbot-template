@@ -8,6 +8,7 @@ export const appConfig = {
     provider: "openai" as "openai" | "anthropic",
     model: "gpt-4o-mini",
     systemPrompt: `You are a helpful AI assistant. Be concise, friendly, and accurate. If you're unsure about something, say so. Format your responses with markdown when appropriate.`,
+    maxOutputTokens: 2048,
   },
 
   // ─── Chat UI ──────────────────────────────────────────

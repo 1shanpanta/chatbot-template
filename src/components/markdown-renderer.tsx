@@ -1,12 +1,18 @@
 "use client";
 
+import { memo } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 
-export function MarkdownRenderer({ content }: { content: string }) {
+export const MarkdownRenderer = memo(function MarkdownRenderer({
+  content,
+}: {
+  content: string;
+}) {
   return (
     <ReactMarkdown
       remarkPlugins={[remarkGfm]}
+      skipHtml
       components={{
         pre({ children }) {
           return (
@@ -94,4 +100,4 @@ export function MarkdownRenderer({ content }: { content: string }) {
       {content}
     </ReactMarkdown>
   );
-}
+});

@@ -1,3 +1,7 @@
+import "server-only";
+
+import { createOpenAI } from "@ai-sdk/openai";
+import { createAnthropic } from "@ai-sdk/anthropic";
 import { appConfig } from "./config";
 
 export function getModel() {
@@ -10,7 +14,6 @@ export function getModel() {
           "OPENAI_API_KEY is not set. Add it to your .env.local file."
         );
       }
-      const { createOpenAI } = require("@ai-sdk/openai");
       const openai = createOpenAI({ apiKey: process.env.OPENAI_API_KEY });
       return openai(model);
     }
@@ -20,7 +23,6 @@ export function getModel() {
           "ANTHROPIC_API_KEY is not set. Add it to your .env.local file."
         );
       }
-      const { createAnthropic } = require("@ai-sdk/anthropic");
       const anthropic = createAnthropic({
         apiKey: process.env.ANTHROPIC_API_KEY,
       });

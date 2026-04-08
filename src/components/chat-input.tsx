@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { ArrowUp, Loader2 } from "lucide-react";
-import { Textarea } from "@/components/ui/textarea";
 import { appConfig } from "@/lib/config";
 
 export function ChatInput({
@@ -33,32 +32,31 @@ export function ChatInput({
     <div className="px-4 pb-4 pt-2">
       <form
         onSubmit={handleSubmit}
-        className="mx-auto max-w-3xl rounded-2xl border border-border/60 bg-card shadow-[0_2px_12px_0_rgba(0,0,0,0.04)] transition-shadow focus-within:shadow-[0_2px_20px_0_rgba(0,0,0,0.06)] focus-within:border-border"
+        className="relative mx-auto max-w-3xl"
       >
-        <Textarea
+        <textarea
           value={input}
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={handleKeyDown}
           placeholder={appConfig.inputPlaceholder}
           aria-label="Chat message"
-          className="min-h-[48px] max-h-[200px] resize-none border-0 bg-transparent px-4 py-3.5 text-[14px] shadow-none ring-0 focus-visible:ring-0 focus-visible:border-0 placeholder:text-muted-foreground/60"
           rows={1}
           disabled={isLoading}
+          className="w-full resize-none rounded-xl bg-muted/50 py-3 pl-4 pr-12 text-[14px] leading-relaxed outline-none transition-colors placeholder:text-muted-foreground/50 focus:bg-muted/70 disabled:opacity-50 dark:bg-muted/30 dark:focus:bg-muted/40"
+          style={{ fieldSizing: "content", maxHeight: 200 } as React.CSSProperties}
         />
-        <div className="flex items-center justify-end px-3 pb-3">
-          <button
-            type="submit"
-            disabled={!input.trim() || isLoading}
-            aria-label={isLoading ? "Sending..." : "Send message"}
-            className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-primary-foreground transition-all duration-150 hover:bg-primary/90 disabled:opacity-30 disabled:cursor-not-allowed"
-          >
-            {isLoading ? (
-              <Loader2 className="h-4 w-4 animate-spin" />
-            ) : (
-              <ArrowUp className="h-4 w-4" />
-            )}
-          </button>
-        </div>
+        <button
+          type="submit"
+          disabled={!input.trim() || isLoading}
+          aria-label={isLoading ? "Sending..." : "Send message"}
+          className="absolute bottom-2 right-2 flex h-7 w-7 items-center justify-center rounded-lg bg-primary text-primary-foreground transition-all duration-150 hover:bg-primary/90 disabled:opacity-20 disabled:cursor-not-allowed"
+        >
+          {isLoading ? (
+            <Loader2 className="h-3.5 w-3.5 animate-spin" />
+          ) : (
+            <ArrowUp className="h-3.5 w-3.5" />
+          )}
+        </button>
       </form>
     </div>
   );

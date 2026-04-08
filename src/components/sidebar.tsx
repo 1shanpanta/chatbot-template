@@ -13,6 +13,7 @@ export function Sidebar() {
   const activeId = useChatStore((s) => s.activeConversationId);
   const createConversation = useChatStore((s) => s.createConversation);
   const deleteConversation = useChatStore((s) => s.deleteConversation);
+  const renameConversation = useChatStore((s) => s.updateConversationTitle);
   const setActive = useChatStore((s) => s.setActiveConversation);
 
   return (
@@ -43,6 +44,7 @@ export function Sidebar() {
               isActive={conversation.id === activeId}
               onSelect={() => setActive(conversation.id)}
               onDelete={() => deleteConversation(conversation.id)}
+              onRename={(title) => renameConversation(conversation.id, title)}
             />
           ))}
         </div>
